@@ -1,7 +1,11 @@
 package com.example.walker;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -41,24 +45,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkPermissions();
 
-        // handle permissions before inflammatory MapView
+        // handle permissions before inflating MapView
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
         setContentView(R.layout.activity_main);
 
         map = (MapView) findViewById(R.id.mapView);
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setMultiTouchControls(true);
-        map.setBuiltInZoomControls(true);
+        if (map != null) {
+            map.setTileSource(TileSourceFactory.MAPNIK);
+            map.setMultiTouchControls(true);
+            map.setBuiltInZoomControls(true);
 
-        IMapController mapController = map.getController();
-        mapController.setZoom(10);
-        GeoPoint startPoint = new GeoPoint(51496994, -134733);
-        mapController.setCenter(startPoint);
+            IMapController mapController = map.getController();
+            mapController.setZoom(10);
+            GeoPoint startPoint = new GeoPoint(51496994, -134733);
+            mapController.setCenter(startPoint);
+        }
 
+        checkPermissions();
     }
 
     private void checkPermissions() {
@@ -73,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupLocationOverlay() {
+        if (map == null) return;
         this.locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), map);
         this.locationOverlay.enableMyLocation();
         this.locationOverlay.enableFollowLocation();

@@ -31,9 +31,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    buildFeatures {
+        viewBinding true
+    }
+
 }
 
 dependencies {
+    implementation 'com.airbnb.android:lottie:6.7.1'
+    implementation libs.coordinatorlayout
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
     implementation 'org.osmdroid:osmdroid-android:6.1.14'
     implementation libs.activity.ktx
     implementation libs.appcompat
