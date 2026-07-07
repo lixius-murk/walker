@@ -31,12 +31,9 @@
 
         <!-- MainActivity is a normal activity -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".PlansActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="true" />
+
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
