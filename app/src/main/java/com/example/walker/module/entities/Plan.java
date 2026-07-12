@@ -11,14 +11,16 @@ public class Plan {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private long id;
+    @ColumnInfo
+    private String name;
     @ColumnInfo(name = "date")
-    private String data;
+    private String date;
 
     @ColumnInfo(name = "state")
     private String state;
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
     public long getId() {
@@ -29,9 +31,18 @@ public class Plan {
         this.id = id;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getState() {
         return state;
     }

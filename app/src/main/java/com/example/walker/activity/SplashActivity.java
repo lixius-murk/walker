@@ -1,4 +1,4 @@
-package com.example.walker;
+package com.example.walker.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.walker.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {

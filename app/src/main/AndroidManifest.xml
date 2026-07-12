@@ -19,7 +19,7 @@
 
         <!-- SplashActivity is the entry point -->
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Walker">
             <intent-filter>
@@ -31,11 +31,11 @@
 
         <!-- MainActivity is a normal activity -->
         <activity
-            android:name=".PlansActivity"
+            android:name=".activity.PlansActivity"
             android:exported="true" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activity.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
     </application>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".PlansActivity">
+    tools:context=".activity.PlansActivity">
     <EditText
         android:id="@+id/planText"
         android:layout_width="316dp"
@@ -38,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/planText">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutPlans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

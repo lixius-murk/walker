@@ -13,6 +13,10 @@ public class Place {
 
     @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "lat")
+    private float lat;
+    @ColumnInfo(name = "longt")
+    private float longt;
 
     public long getId() {
         return id;

@@ -4,4 +4,19 @@
 <style name="AppTheme.RoundedCornerMaterialButton" parent="Widget.AppCompat.Button.Colored">
     <item name="android:background">@drawable/rounded_shape</item>
 </style>
+    <style name="CustomChip"  parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor"> @color/color_chip</item>
+        <item name="android:textColor"> @color/color_text_chip</item>
+    </style>
+    <style name="CustomButton"  parent="Widget.MaterialComponents.Button">
+        <item name="background"> @color/color_button</item>
+        <item name="android:textColor"> @color/color_text_button</item>
+    </style>
+    <style name="CustomMainText" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="color">@color/color_text</item>
+    </style>
+    <style name="CustomCaptionText" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="color">@color/color_text</item>
+    </style>
+
 </resources>
