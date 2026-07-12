@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -34,13 +35,13 @@ import java.util.Iterator;
 
 public class PlansActivity extends AppCompatActivity {
     private MyLocationNewOverlay locationOverlay;
-    private Button addBtn = null;
-    private Button plansBtn = null;
-    private Button settingsBtn = null;
+    private ImageButton addBtn = null;
+    private ImageButton plansBtn = null;
+    private ImageButton settingsBtn = null;
 
     private ScrollView scrollView = null;
 
-    private DatabaseController dbc = new DatabaseController(getApplicationContext());
+    private DatabaseController dbc;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -60,6 +61,7 @@ public class PlansActivity extends AppCompatActivity {
         if (addBtn == null | plansBtn == null | scrollView == null| settingsBtn == null) {
             Log.e("PlansActivity", "addBtn or ScrollView or plansBtn or settingsBtn is null");
         }
+        dbc = new DatabaseController(getApplicationContext());
 
 
         addBtn.setOnClickListener(new View.OnClickListener() {

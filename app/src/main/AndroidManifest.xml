@@ -29,6 +29,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.AddPlanActivity"
+            android:exported="false" />
         <!-- MainActivity is a normal activity -->
         <activity
             android:name=".activity.PlansActivity"

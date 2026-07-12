@@ -35,7 +35,7 @@ public class AddPlanActivity extends AppCompatActivity {
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
-        setContentView(R.layout.activity_plans);
+        setContentView(R.layout.activity_add_plan);
 
         map = (MapView) findViewById(R.id.map);
         if (map != null) {

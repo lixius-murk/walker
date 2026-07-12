@@ -55,7 +55,7 @@ public class DatabaseController extends SQLiteOpenHelper {
     }
     public ArrayList<Plan> getAllPlans(){
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM plans");
+        Cursor cursor = db.rawQuery("SELECT * FROM plans", null);
         ArrayList<Plan> list = new ArrayList<>();
 
         while(cursor.moveToNext()){
