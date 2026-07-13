@@ -7,7 +7,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,6 +34,13 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 public class AddPlanActivity extends AppCompatActivity {
     private MapView map = null;
     private MyLocationNewOverlay locationOverlay;
+    private ImageButton btnBack = null;
+    private EditText editTextNane = null;
+
+    Button dateBtn = null;
+    boolean exit;
+    private PopupWindow.OnDismissListener popupListener;
+    private PopupWindow popupWindow;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +48,18 @@ public class AddPlanActivity extends AppCompatActivity {
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
+        exit = false;
         setContentView(R.layout.activity_add_plan);
+        editTextNane = findViewById(R.id.nameEditText);
+        btnBack = findViewById(R.id.backActionButton);
+        btnBack.setOnClickListener(v -> goBack());
+        dateBtn = findViewById(R.id.dateBtn);
+        dateBtn.setOnClickListener(v -> showPopup());
+        popupListener = new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {}
+        };
+
 
         map = (MapView) findViewById(R.id.map);
         if (map != null) {
@@ -49,6 +73,22 @@ public class AddPlanActivity extends AppCompatActivity {
             mapController.setCenter(startPoint);
         }
 
+    }
+    @Override
+    public void onContentChanged(){
+        super.onContentChanged();
+        exit = false;
+    }
+
+    private void goBack() {
+        if (exit) {
+            finish();
+        } else {
+            exit = true;
+            Toast.makeText(this, "tap back again to leave without saving", Toast.LENGTH_SHORT).show();
+            //non-blocking delay
+            new android.os.Handler(getMainLooper()).postDelayed(() -> exit = false, 2000);
+        }
     }
 
 
@@ -74,6 +114,18 @@ public class AddPlanActivity extends AppCompatActivity {
                     Manifest.permission.ACCESS_COARSE_LOCATION
             });
         }
+    }
+    private void showPopup() {
+        View popupView = getLayoutInflater().inflate(R.layout.popup_date, null);
+
+        PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true
+        );
+        popupWindow.setOnDismissListener(popupListener);
+        popupWindow.showAtLocation(findViewById(R.id.activity_add_plan), Gravity.CENTER, 0, 0);
     }
 
     private void setupLocationOverlay() {

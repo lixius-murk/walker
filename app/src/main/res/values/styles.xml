@@ -10,7 +10,7 @@
     </style>
     <style name="CustomButton"  parent="Widget.MaterialComponents.Button">
         <item name="background"> @color/color_button</item>
-        <item name="android:textColor"> @color/color_text_button</item>
+
     </style>
     <style name="CustomMainText" parent="TextAppearance.MaterialComponents.Body1">
         <item name="color">@color/color_text</item>

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.example.walker.R;
@@ -39,7 +40,7 @@ public class PlansActivity extends AppCompatActivity {
     private ImageButton plansBtn = null;
     private ImageButton settingsBtn = null;
 
-    private ScrollView scrollView = null;
+    private ConstraintLayout layoutPlans = null;
 
     private DatabaseController dbc;
 
@@ -57,20 +58,36 @@ public class PlansActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.add_btn);
         plansBtn = findViewById(R.id.plan_btn);
         settingsBtn = findViewById(R.id.setting_btn);
-        scrollView=findViewById(R.id.scrollPlans);
-        if (addBtn == null | plansBtn == null | scrollView == null| settingsBtn == null) {
+        layoutPlans=findViewById(R.id.layoutPlans);
+        if (addBtn == null | plansBtn == null | layoutPlans == null| settingsBtn == null) {
             Log.e("PlansActivity", "addBtn or ScrollView or plansBtn or settingsBtn is null");
         }
         dbc = new DatabaseController(getApplicationContext());
-
+        final ActivityResultLauncher<Intent> addPlanLauncher =
+                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        String planName = result.getData().getStringExtra("planName");
+                    }
+                });
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("PlansActivity", "clicked add plan");
                 Intent addPlanIntent = new Intent(PlansActivity.this, AddPlanActivity.class);
-                startActivity(addPlanIntent);
-                //finish();
-        }});
+                addPlanLauncher.launch(addPlanIntent);
+            }
+        });
+        plansBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("PlansActivity", "clicked plans");
+            }
+        });
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("PlansActivity", "clicked settings");
+            }
+        });
+        loadPlans();
 
 
 
@@ -89,15 +106,17 @@ public class PlansActivity extends AppCompatActivity {
             TextView name = new TextView(this);
             name.setText(pl.getName());
             TextView date = new TextView(this);
-            name.setText(pl.getDate());
+            date.setText(pl.getDate());
             TextView state = new TextView(this);
-            name.setText(pl.getState());
+            state.setText(pl.getState());
+            linearLayout.addView(name);
+            linearLayout.addView(date);
+            linearLayout.addView(state);
+            layoutPlans.addView(linearLayout);
             Log.d("Plans Activity", "added note from list");
-
         }
-
-        return;
     }
+
 
 
     @Override
