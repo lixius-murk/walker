@@ -65,13 +65,14 @@ public class DatabaseController extends SQLiteOpenHelper {
             pl.setId(cursor.getInt(0));
             pl.setName(cursor.getString(1));
             pl.setDate(cursor.getString(2));
+            pl.setState(cursor.getString(3));
             list.add(pl);
         }
         cursor.close();
         return list;
     }
 
-    public List<Plan> getPlacesForPlan(Long id){
+    public List<Place> getPlacesForPlan(Long id){
         List<Long> ids = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT id_stop FROM ps WHERE id_plan = ?;", new String[]{String.valueOf(id)});
@@ -80,11 +81,11 @@ public class DatabaseController extends SQLiteOpenHelper {
         }
         cursor.close();
 
-        List<Plan> list = new ArrayList<>();
+        List<Place> list = new ArrayList<>();
         for(Long idd: ids){
             cursor = db.rawQuery("SELECT * FROM stops WHERE id = ?;", new String[]{String.valueOf(idd)});
             if(cursor.moveToNext()){
-                Plan pl = new Plan();
+                Place pl = new Place();
                 pl.setId(cursor.getLong(0));
                 pl.setName(cursor.getString(1));
                 pl.setLat(cursor.getFloat(2));
@@ -92,6 +93,7 @@ public class DatabaseController extends SQLiteOpenHelper {
 
                 list.add(pl);
             }
+            cursor.close();
         }
         return list;
     }

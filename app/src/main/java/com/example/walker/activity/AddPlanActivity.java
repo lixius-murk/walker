@@ -136,11 +136,14 @@ public class AddPlanActivity extends AppCompatActivity {
         long newPlanId = dbController.AddNewPlan(name, selectedDate, selectedStops.toArray(new Place[0]));
         planId = newPlanId;
 
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("planName", name);
+        setResult(RESULT_OK, resultIntent);
+
         Toast.makeText(this, "plan saved", Toast.LENGTH_SHORT).show();
         Log.d("AddPlanActivity", "plan saved");
         finish();
     }
-
     private void SetUpMapStops() {
         MapEventsReceiver receiver = new MapEventsReceiver() {
 

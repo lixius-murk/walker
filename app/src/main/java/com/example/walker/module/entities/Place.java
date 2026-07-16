@@ -33,4 +33,20 @@ public class Place {
     public void setName(String name) {
         this.name = name;
     }
+
+    public float getLongt() {
+        return longt;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+
+    public void setLat(float lat) {
+        this.lat = lat;
+    }
+
+    public void setLongt(float longt) {
+        this.longt = longt;
+    }
 }

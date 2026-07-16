@@ -67,6 +67,7 @@ public class PlansActivity extends AppCompatActivity {
                 registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         String planName = result.getData().getStringExtra("planName");
+                        loadPlans();
                     }
                 });
 
@@ -95,6 +96,7 @@ public class PlansActivity extends AppCompatActivity {
 
 
     public void loadPlans(){
+        layoutPlans.removeAllViews();
         ArrayList<Plan> list = dbc.getAllPlans();
         if(list.isEmpty()){
             Log.d("Plans Activity", "empty list");
