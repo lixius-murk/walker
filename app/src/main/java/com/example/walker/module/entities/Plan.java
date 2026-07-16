@@ -19,6 +19,11 @@ public class Plan {
     @ColumnInfo(name = "state")
     private String state;
 
+    @ColumnInfo(name = "lat")
+    private float lat;
+    @ColumnInfo(name = "longt")
+    private float longt;
+
     public String getDate() {
         return date;
     }
@@ -52,4 +57,19 @@ public class Plan {
     }
 
 
+    public void setLat(float lat) {
+        this.lat = lat;
+    }
+
+    public void setLongt(float longt) {
+        this.longt = longt;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+
+    public float getLongt() {
+        return longt;
+    }
 }

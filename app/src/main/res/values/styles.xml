@@ -8,15 +8,16 @@
         <item name="chipBackgroundColor"> @color/color_chip</item>
         <item name="android:textColor"> @color/color_text_chip</item>
     </style>
-    <style name="CustomButton"  parent="Widget.MaterialComponents.Button">
-        <item name="background"> @color/color_button</item>
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/color_button</item>
+    </style>
 
-    </style>
     <style name="CustomMainText" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="color">@color/color_text</item>
+        <item name="android:textColor">@color/color_text</item>
     </style>
+
     <style name="CustomCaptionText" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="color">@color/color_text</item>
+        <item name="android:textColor">@color/color_text</item>
     </style>
 
 </resources>

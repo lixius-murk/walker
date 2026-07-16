@@ -9,11 +9,13 @@ import android.util.Log;
 import com.example.walker.module.entities.Place;
 import com.example.walker.module.entities.Plan;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 public class DatabaseController extends SQLiteOpenHelper {
 
@@ -69,7 +71,34 @@ public class DatabaseController extends SQLiteOpenHelper {
         return list;
     }
 
-    public long AddNewPlace(String name, Long planId){
+    public List<Plan> getPlacesForPlan(Long id){
+        List<Long> ids = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT id_stop FROM ps WHERE id_plan = ?;", new String[]{String.valueOf(id)});
+        while(cursor.moveToNext()){
+            ids.add(cursor.getLong(0));
+        }
+        cursor.close();
+
+        List<Plan> list = new ArrayList<>();
+        for(Long idd: ids){
+            cursor = db.rawQuery("SELECT * FROM stops WHERE id = ?;", new String[]{String.valueOf(idd)});
+            if(cursor.moveToNext()){
+                Plan pl = new Plan();
+                pl.setId(cursor.getLong(0));
+                pl.setName(cursor.getString(1));
+                pl.setLat(cursor.getFloat(2));
+                pl.setLongt(cursor.getFloat(3));
+
+                list.add(pl);
+            }
+        }
+        return list;
+    }
+
+
+
+    public long addNewPlace(String name, Long planId){
         SQLiteDatabase db = getWritableDatabase();
 
         long stopId;
@@ -91,6 +120,19 @@ public class DatabaseController extends SQLiteOpenHelper {
     }
 
 
+    public List<Place> getAllPlaces(){
+        List<Place> list = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM stops", null);
+        while(cursor.moveToNext()){
+            Place pl = new Place();
+            pl.setId(cursor.getInt(0));
+            pl.setName(cursor.getString(1));
+            list.add(pl);
+        }
+        cursor.close();
+        return list;
+    }
     public long AddNewPlan(String name, Date date, Place[] places){
         SQLiteDatabase db = getWritableDatabase();
 
